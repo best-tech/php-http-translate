@@ -8,19 +8,31 @@ $REQUEST_METHOD = $_SERVER['REQUEST_METHOD'];
 
 $DEST = getenv('DEST');
 
+$DEST_FINAL = $DEST.'';
 
 if ($REQUEST_METHOD=='POST')
 {
-	
-	
-	
+	$baseText = (string) implode("", file('php://input'));
 }
-elseif ($REQUEST_METHOD=='GET')
+else
 {
-	
-	
-	
+	$baseText = '';
 }
 
+// Создать контекст и инициализировать POST запрос
+ $context = stream_context_create(array(
+        'http' => array(
+            'method' => $REQUEST_METHOD,
+            'header' => 'Content-Type: application/json' . PHP_EOL,
+            'content' => $baseText,
+        ),
+    ));
+
+// Отправить запрос на себя, чтобы запустить тесты
+    // и показать результат выполнения тестов
+    echo file_get_contents(
+        $file = $DEST_FINAL,
+        $use_include_path = false,
+        $context);
 
 ?>
