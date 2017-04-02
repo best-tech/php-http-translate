@@ -1,0 +1,15 @@
+{
+  "name": "php-http-translate",
+  "description": "Ретранслятор запросов GET и POST на указанный адрес, напримен с https на http.",
+  "image": "heroku/php",
+  "repository": "https://github.com/best-tech/php-http-translate",
+  "website": "http://4098.ru/",
+  "logo": "https://github.com/best-tech/viber-1c/blob/master/web/images/logo.jpg?raw=true",
+  "keywords": ["http", "php", "translate"],
+   "env": {
+    "DEST": {
+      "description": "Адрес назначения для ретрансляции",
+      "value": "http://ya.ru"
+    }
+  }
+}
