@@ -4,11 +4,13 @@ require('../vendor/autoload.php');
 ini_set('display_errors',1);
 ini_set("error_reporting", E_ALL);
 
+$uri = $_SERVER['REQUEST_URI'];
+
 $REQUEST_METHOD = $_SERVER['REQUEST_METHOD'];
 
 $DEST = getenv('DEST');
 
-$DEST_FINAL = $DEST.'';
+$DEST_FINAL = $DEST.$uri;
 
 if ($REQUEST_METHOD=='POST')
 {
@@ -19,6 +21,7 @@ else
 	$baseText = '';
 }
 
+//echo $DEST_FINAL;
 // Создать контекст и инициализировать POST запрос
  $context = stream_context_create(array(
         'http' => array(
