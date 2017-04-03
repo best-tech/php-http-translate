@@ -16,15 +16,16 @@ if ($REQUEST_METHOD=='POST')
 {
 	$baseText = (string) implode("", file('php://input'));
     $contLenght = strlen($baseText);
-	$requestHeaders = array(
-        'Content-Type: application/json',
-        sprintf('Content-Length: %d',  $contLenght)
-        );
+    // getallheaders
+	// $requestHeaders = array(
+    //     'Content-Type: application/json',
+    //     sprintf('Content-Length: %d',  $contLenght)
+    //     );
 	// 	Создать контекст и инициализировать POST запрос
 	 $context = stream_context_create(array(
 	        'http' => array(
 	            'method' => $REQUEST_METHOD,
-	            'header' => $requestHeaders,
+	            //'header' => $requestHeaders,
 	            'content' => $baseText,
 	        ),
 	    ));
@@ -34,7 +35,7 @@ if ($REQUEST_METHOD=='POST')
 	    echo file_get_contents(
 	        $file = $DEST_FINAL,
 	        $use_include_path = false,
-	        $context,false,$contLenght);
+	        $context);
 }
 else
 {
