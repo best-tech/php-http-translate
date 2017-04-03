@@ -18,7 +18,7 @@ if ($REQUEST_METHOD=='POST')
     $contLenght = strlen($baseText);
 	$requestHeaders = array(
         'Content-Type: application/json',
-        'Content-Length: 0'
+        sprintf('Content-Length: %d',  $contLenght)
         );
 	// 	Создать контекст и инициализировать POST запрос
 	 $context = stream_context_create(array(
@@ -34,7 +34,7 @@ if ($REQUEST_METHOD=='POST')
 	    echo file_get_contents(
 	        $file = $DEST_FINAL,
 	        $use_include_path = false,
-	        $context,false,0);
+	        $context,false,$contLenght);
 }
 else
 {
