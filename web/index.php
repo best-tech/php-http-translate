@@ -15,27 +15,50 @@ $DEST_FINAL = $DEST.$uri;
 if ($REQUEST_METHOD=='POST')
 {
 	$baseText = (string) implode("", file('php://input'));
+
+	$requestHeaders = array(
+        'Content-Type: application/json' . PHP_EOL,
+        sprintf('Content-Length: %d', strlen($baseText))
+        );
+	// 	Создать контекст и инициализировать POST запрос
+	 $context = stream_context_create(array(
+	        'http' => array(
+	            'method' => $REQUEST_METHOD,
+	            'header' => $requestHeaders,
+	            'content' => $baseText,
+	        ),
+	    ));
+	
+	// 	Отправить запрос на себя, чтобы запустить тесты
+	    // 	и показать результат выполнения тестов
+	    echo file_get_contents(
+	        $file = $DEST_FINAL,
+	        $use_include_path = false,
+	        $context);
 }
 else
 {
 	$baseText = '';
+	
+	//e	cho $DEST_FINAL;
+	// 	Создать контекст и инициализировать POST запрос
+	 $context = stream_context_create(array(
+	        'http' => array(
+	            'method' => $REQUEST_METHOD,
+	            'header' => 'Content-Type: application/json' . PHP_EOL,
+	            'content' => $baseText,
+	        ),
+	    ));
+	
+	// 	Отправить запрос на себя, чтобы запустить тесты
+	    // 	и показать результат выполнения тестов
+	    echo file_get_contents(
+	        $file = $DEST_FINAL,
+	        $use_include_path = false,
+	        $context);
+	
 }
 
-//echo $DEST_FINAL;
-// Создать контекст и инициализировать POST запрос
- $context = stream_context_create(array(
-        'http' => array(
-            'method' => $REQUEST_METHOD,
-            'header' => 'Content-Type: application/json' . PHP_EOL,
-            'content' => $baseText,
-        ),
-    ));
 
-// Отправить запрос на себя, чтобы запустить тесты
-    // и показать результат выполнения тестов
-    echo file_get_contents(
-        $file = $DEST_FINAL,
-        $use_include_path = false,
-        $context);
 
 ?>
