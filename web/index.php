@@ -15,10 +15,10 @@ $DEST_FINAL = $DEST.$uri;
 if ($REQUEST_METHOD=='POST')
 {
 	$baseText = (string) implode("", file('php://input'));
-
+    $contLenght = strlen($baseText);
 	$requestHeaders = array(
         'Content-Type: application/json' . PHP_EOL,
-        sprintf('Content-Length: %d', strlen($baseText))
+        sprintf('Content-Length: %d',  $contLenght)
         );
 	// 	Создать контекст и инициализировать POST запрос
 	 $context = stream_context_create(array(
@@ -34,7 +34,7 @@ if ($REQUEST_METHOD=='POST')
 	    echo file_get_contents(
 	        $file = $DEST_FINAL,
 	        $use_include_path = false,
-	        $context);
+	        $context,false,$contLenght);
 }
 else
 {
