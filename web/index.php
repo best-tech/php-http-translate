@@ -16,7 +16,6 @@ if ($REQUEST_METHOD=='POST')
 {
 	$baseText = (string) implode("", file('php://input'));
     $contLenght = strlen($baseText);
-    // getallheaders
 	// $requestHeaders = array(
     //     'Content-Type: application/json',
     //     sprintf('Content-Length: %d',  $contLenght)
@@ -30,12 +29,14 @@ if ($REQUEST_METHOD=='POST')
 	        ),
 	    ));
 	
-	// 	Отправить запрос на себя, чтобы запустить тесты
-	    // 	и показать результат выполнения тестов
-	    echo file_get_contents(
-	        $file = $DEST_FINAL,
-	        $use_include_path = false,
-	        $context);
+		try{
+			
+			echo file_get_contents($file = $DEST_FINAL,$use_include_path = false,$context);
+		}
+	   	 
+		catch (Exception $e) {
+    		echo 'off try';
+			}
 }
 else
 {
