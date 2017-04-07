@@ -72,10 +72,7 @@ else
 
     //            Отправить запрос на себя, чтобы запустить тесты
     //        и показать результат выполнения тестов
-    echo file_get_contents(
-        $file = $DEST_FINAL,
-        $use_include_path = false,
-        $context);
+    echo file_get_contents($DEST_FINAL,false,$context);
 
 }
 
