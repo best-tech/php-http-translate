@@ -59,13 +59,27 @@ if ($REQUEST_METHOD=='POST')
 else
 {
     $baseText = '';
+ 	
+	 $headers = getallheaders();
 
-    //e         cho $DEST_FINAL;
-    //            Создать контекст и инициализировать POST запрос
+//    unset($headers['Host']);
+//    unset($headers['Accept-Language']);
+
+//    $headers["Content-Type"] = "application/json"
+//    $headers["Content-Length"] = strlen($baseText);
+
+    $requestHeaders = [];
+    foreach($headers as $key => $value) {
+        $requestHeaders[] = $key . ": " . $value;
+    }
+
+//    $requestHeaders[] = "Content-Type: application/json";
+
+    
     $context = stream_context_create(array(
         'http' => array(
             'method' => $REQUEST_METHOD,
-            'header' => 'Content-Type: application/json' . PHP_EOL,
+            'header' => $requestHeaders,
             'content' => $baseText,
         ),
     ));
